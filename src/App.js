@@ -18,16 +18,12 @@ class App extends Component {
         //text: ' ',
       });
       this.state.text = '';
-      alert(this.state.text);
     }
   };
   updateText(e) {
     this.setState({
       text: e.target.value,
     });
-  }
-  handleSubmit(e) {
-    alert('envio formulario');
   }
 
   render() {
@@ -40,7 +36,7 @@ class App extends Component {
               <li key={index}>{item}</li>
             ))}
           </ul>
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <input
               type="text"
               id="new-task"
