@@ -1,26 +1,59 @@
 import React, { Component } from 'react';
 
 /// Modifica el componente para que se puedan agregar tareas
-
+//const Element = (props) => <li>{props.item}</li>;
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: ' ',
+      list: ['Sacar la ropa', 'Hacer la cama', 'Leer un rato'],
+    };
+  }
+  handleText = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.setState({
+        list: this.state.list.concat(this.state.text),
+        //text: ' ',
+      });
+      this.state.text = '';
+      alert(this.state.text);
+    }
+  };
+  updateText(e) {
+    this.setState({
+      text: e.target.value,
+    });
+  }
+  handleSubmit(e) {
+    alert('envio formulario');
+  }
+
   render() {
     return (
       <div className="wrapper">
         <div className="list">
           <h3>Por hacer:</h3>
           <ul className="todo">
-            <li>Sacar la ropa</li>
-            <li>Hacer la cama</li>
-            <li>Leer un rato</li>
+            {this.state.list.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
-           <form>
-             <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" />
-           </form>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              id="new-task"
+              value={this.state.text}
+              onChange={this.updateText.bind(this)}
+              onKeyPress={this.handleText.bind(this)}
+              placeholder="Ingresa una tarea y oprime Enter"
+            />
+          </form>
         </div>
       </div>
-    )
+    );
   }
 }
-
 
 export default App;
